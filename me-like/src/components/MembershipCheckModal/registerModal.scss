@@ -1,0 +1,50 @@
+@use "../../assests/styles/mixin.scss";
+@import "../../assests//styles/colors.scss";
+
+.register-modal-desktop {
+	.mantine-Modal-close {
+		background-color: $slate-1;
+	}
+	.react-tel-input {
+		.form-control {
+			background: #fff;
+			border: none;
+			width: 100%;
+			box-shadow: none;
+		}
+		.flag-dropdown {
+			border: none;
+			background-color: #fff;
+
+			&.open {
+				background: #fff;
+
+				.selected-flag {
+					background: #fff;
+				}
+			}
+
+			.selected-flag {
+				&:hover {
+					background-color: #fff;
+					cursor: default;
+				}
+			}
+
+			.selected-flag {
+				.arrow {
+					display: none;
+				}
+			}
+		}
+	}
+	.mantine-Modal-inner {
+		padding: 0;
+	}
+}
+
+.sheet-mobile {
+	@include mixin.responsive(mobile) {
+		display: block;
+	}
+}

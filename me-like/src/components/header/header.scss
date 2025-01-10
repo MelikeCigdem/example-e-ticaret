@@ -1,0 +1,112 @@
+header {
+  // height: 52px;
+  position: relative;
+  z-index: 4;
+  background-color: #314457;
+  border-bottom: 0.0625rem solid #314457;
+}
+
+.header {
+  a{
+    color: black;
+    text-decoration: none !important; 
+    cursor: pointer;
+  }
+  
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  transition: transform 0.3s ease;
+  .header-link{
+    color:#fff; 
+    text-decoration: none; 
+    &:hover {
+      color: #fff;
+      text-decoration: none; 
+    }
+  }
+}
+
+.shadow {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+[data-rsbs-is-blocking="false"] [data-rsbs-overlay] {
+  z-index: 99999999 !important;
+}
+.hovercard-flex {
+  margin: auto;
+  .howercard {
+    width: 196px;
+    margin-right: 24px;
+  }
+  .howercard-populer {
+    width: 296px;
+    margin-right: 24px;
+  }
+}
+.header-search-input {
+  font-family: inherit;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  // @media (min-width: 992px) and (max-width: 1160px) {
+  //   display: none;
+  // }
+}
+.header-search-input:focus-visible {
+  border: 0.0625rem solid rgb(59, 58, 58) !important;
+}
+
+.header-search-input .mantine-Input-input {
+  background-color: #f1f5f9;
+  border: unset;
+
+  // @media (min-width: 992px) and (max-width: 1160px) {
+  //   display: none;
+  // }
+}
+
+.ipad-hidden {
+  @media (min-width: 992px) and (max-width: 1160px) {
+    display: none;
+  }
+}
+.ipad-padding {
+  @media (min-width: 992px) and (max-width: 1160px) {
+    padding: unset !important;
+  }
+}
+
+.left-draver {
+  .mantine-Drawer-inner.mantine-Drawer-inner {
+    display: flow-root;
+
+    .mantine-Paper-root .mantine-Drawer-header .mantine-Drawer-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #000000;
+    }
+    // .mantine-Paper-root.mantine-Drawer-content .mantine-Drawer-header .mantine-UnstyledButton-root{
+    //   width: 100%;
+    //   display: flex;
+    // }
+  }
+}
+
+.basket-total[total-quantity]::after {
+  content: attr(total-quantity) " ";
+  color: #ffffff;
+  padding: 4px 4px 2px 4px;
+  background: #ff5000;
+  // background: #2b2f39;
+  border-radius: 4px;
+  position: absolute;
+  left: 19px;
+  font-size: 10px;
+  line-height: unset;
+  top: -3px;
+}
+
+.inputSearch > button {
+  outline: 1px solid #ebebeb !important;
+}

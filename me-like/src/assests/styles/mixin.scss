@@ -1,0 +1,100 @@
+$shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+$box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+
+$font-size-base: 16px;
+$size-xs: 5px;
+$size-sm: 10px;
+$size-md: 20px;
+$size-lg: 40px;
+$size-xl: 60px;
+$size-xxl: 80px;
+$size-db-xl: 150px;
+$radius-md: 5px;
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint==tablet {
+    @media only screen and (max-width: 1400px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==tablet-min {
+    @media only screen and (max-width: 992px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==mobile {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==small {
+    @media only screen and (max-width: 576px) {
+      @content;
+    }
+  }
+  @if $breakpoint==min-small {
+    @media only screen and (max-width: 360px) {
+      @content;
+    }
+  }
+}
+
+@mixin container() {
+  width: 90%;
+  margin: auto;
+
+  @include responsive(mobile) {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+@mixin container_mini() {
+  width: 1040px;
+  margin: auto;
+
+  @include responsive(mobile) {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+@mixin custom-form-border {
+  border: 0.0625rem solid #9ca3af !important;
+}
+
+// Example usage  @include custom-scrollbar(red, 8px, 16px, #cccccc);
+@mixin custom-scrollbar(
+  $color: #cccccc,
+  $background: #fff,
+  $hover: #a8a8a8,
+  $width: 5px,
+  $height: 5px
+) {
+  &::-webkit-scrollbar {
+    height: $height;
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $hover;
+  }
+}
+
+@mixin toCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
