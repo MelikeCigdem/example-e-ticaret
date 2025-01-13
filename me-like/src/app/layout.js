@@ -7,8 +7,8 @@ import { SessionProvider, signOut } from "next-auth/react";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-
-
+import { Provider } from "react-redux";
+import { store } from "@/store/store";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,13 +21,10 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-
 const RegisterModal = dynamic(
   () => import("@/components/MembershipCheckModal"),
   { ssr: false }
 );
-
-
 
 export default function RootLayout({ children }) {
   const [openSheet, setOpenSheet] = useState(false);
@@ -40,7 +37,6 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const mobileStatus = getCookie("deviceis");
-    console.log("Cookie value:", mobileStatus);
     setCookieIsMobile(mobileStatus);
   }, []);
 
@@ -62,15 +58,17 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <SessionProvider>
-          <Header
-            openAuth={openAuth}
-            safeLogout={safeLogout}
-          />
-          <RegisterModal opened={registerModal} onClose={registerModalClose} />
-         
-          {children}
-        </SessionProvider>
+        <Provider store={store}>
+          <SessionProvider>
+            <Header openAuth={openAuth} safeLogout={safeLogout} />
+            <RegisterModal
+              opened={registerModal}
+              onClose={registerModalClose}
+            />
+
+            {children}
+          </SessionProvider>
+        </Provider>
       </body>
     </html>
   );

@@ -33,6 +33,7 @@ import GMButton from "../GetDesign/GMButton";
 import "../header/header.scss";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -108,10 +109,8 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const { classes, theme } = useStyles();
-  const [localBasket, setLocalBasket] = useLocalStorage({
-    key: "localBasket",
-    defaultValue: [],
-  });
+
+  const pointOfSellState = useSelector((state) => state.pointOfSell);
   const [shadow, setShadow] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -418,7 +417,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                           width: "22px",
                           marginRight: "5px",
                         }}
-                        total-quantity={localBasket.length}
+                        total-quantity={pointOfSellState.localBasket.length}
                       >
                         <Image
                           src={userMobile}
@@ -555,7 +554,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                     height: "23px",
                     width: "35px",
                   }}
-                  total-quantity={0}
+                  total-quantity={pointOfSellState.localBasket.length}
                 >
                   <Image
                     src={basketMobile}
@@ -574,7 +573,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                      color:"#fff"
                   }}
                 >
-                  SEPETİM
+                  SEPETİM1
                 </Text>
               </Link>
             </GMButton>
@@ -616,10 +615,8 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
               <div
                 className=" position-relative mt-2 basket-total"
                 style={{ height: "21px", width: "30px" }}
-                /* total-quantity={
-                    session ? session.cart.variants.length : localBasket.length
-                  } */
-                total-quantity={localBasket.length}
+               
+                total-quantity={pointOfSellState.localBasket.length}
               >
                 <Link href="/sepetim/" className={classes.link}>
                   <Image
@@ -762,7 +759,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                   <div
                     className=" position-relative basket-total"
                     style={{ height: "21px", width: "30px" }}
-                    total-quantity={localBasket.length}
+                    total-quantity={pointOfSellState.localBasket.length}
                   >
                     <Image
                       src={basketMobile}

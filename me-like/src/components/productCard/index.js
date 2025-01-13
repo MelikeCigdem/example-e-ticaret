@@ -1,7 +1,10 @@
+import { addToBasket } from "@/store/features/pointOfSell/pointOfSellSlice";
 import { Badge, Button, Card, Image } from "@mantine/core";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 function ProductCard({ products }) {
+  const dispatch = useDispatch();
 
   function calculateDiscountPercentage(price, discountedPrice) {
     if (price <= 0) {
@@ -11,6 +14,11 @@ function ProductCard({ products }) {
     const discountPercentage = ((1 - (discountedPrice / price)) * 100).toFixed(2);
     return discountPercentage;
   }
+
+  const addItemToBasket  = async (product) => {
+    dispatch(addToBasket(product));
+  }
+
   return (
     <div className="container mt-4">
       <div className="row">
@@ -54,7 +62,7 @@ function ProductCard({ products }) {
                 color="blue"
                 className="mt-3"
                 component="a"
-                href={product.link}
+                onClick={()=> {addItemToBasket(product)}}
               >
                 Sepete Ekle
               </Button>
