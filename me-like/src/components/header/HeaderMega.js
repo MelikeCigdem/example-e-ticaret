@@ -33,6 +33,8 @@ import GMButton from "../GetDesign/GMButton";
 import "../header/header.scss";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
+import { selectTotalItems } from "@/app/store/features/pointOfSell/pointOfSellSlice";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -105,13 +107,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function HeaderMegaMenu({ openAuth, safeLogout }) {
+  const pointOfSellState = useSelector((state) => state.pointOfSell);
+
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const { classes, theme } = useStyles();
-  const [localBasket, setLocalBasket] = useLocalStorage({
-    key: "localBasket",
-    defaultValue: [],
-  });
+
   const [shadow, setShadow] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -146,7 +147,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
       }}
     >
       {/* Web */}
-      <Header px="md" bg={"#314457"} style={{borderBottom:"unset"}}>
+      <Header px="md" bg={"#314457"} style={{ borderBottom: "unset" }}>
         <Group
           position="apart"
           sx={{ height: "100%" }}
@@ -201,7 +202,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
               <HoverCard.Target>
                 <Link
                   href="products"
-                  className={`header-link `+ classes.link }
+                  className={`header-link ` + classes.link}
                   style={{ paddingLeft: "30px" }}
                 >
                   <Text mr={10} fw={500}>
@@ -337,14 +338,26 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
               </HoverCard.Dropdown>
             </HoverCard>
 
-            <Link href="/sat/telefon/"  className={`header-link `+ classes.link }fw={500}>
+            <Link
+              href="/sat/telefon/"
+              className={`header-link ` + classes.link}
+              fw={500}
+            >
               TELEFON SAT
             </Link>
 
-            <Link href="/magazalarimiz/"  className={`header-link `+ classes.link } fw={500}>
+            <Link
+              href="/magazalarimiz/"
+              className={`header-link ` + classes.link}
+              fw={500}
+            >
               MAĞAZALAR
             </Link>
-            <Link href="/bayilik/"  className={`header-link `+ classes.link } fw={500}>
+            <Link
+              href="/bayilik/"
+              className={`header-link ` + classes.link}
+              fw={500}
+            >
               İŞ ORTAĞI OL
             </Link>
           </Group>
@@ -352,7 +365,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
             <div
               style={{
                 display: "flex",
-                alignItems: "center", 
+                alignItems: "center",
                 borderBottom: 0,
                 height: "fit-content",
                 marginBottom: "10px",
@@ -418,7 +431,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                           width: "22px",
                           marginRight: "5px",
                         }}
-                        total-quantity={localBasket.length}
+                        total-quantity={pointOfSellState.localBasket.length}
                       >
                         <Image
                           src={userMobile}
@@ -433,7 +446,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                         fw={500}
                         fz={14}
                         className="ipad-hidden"
-                        style={{ cursor: "pointer", color:"#fff" }}
+                        style={{ cursor: "pointer", color: "#fff" }}
                       >
                         PROFİL
                       </Box>
@@ -555,7 +568,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                     height: "23px",
                     width: "35px",
                   }}
-                  total-quantity={0}
+                  total-quantity={pointOfSellState.localBasket.length}
                 >
                   <Image
                     src={basketMobile}
@@ -571,7 +584,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                   fz={14}
                   className="basketDesktopText ipad-hidden"
                   style={{
-                     color:"#fff"
+                    color: "#fff",
                   }}
                 >
                   SEPETİM
@@ -616,10 +629,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
               <div
                 className=" position-relative mt-2 basket-total"
                 style={{ height: "21px", width: "30px" }}
-                /* total-quantity={
-                    session ? session.cart.variants.length : localBasket.length
-                  } */
-                total-quantity={localBasket.length}
+                total-quantity={pointOfSellState.localBasket.length}
               >
                 <Link href="/sepetim/" className={classes.link}>
                   <Image
@@ -762,7 +772,7 @@ export function HeaderMegaMenu({ openAuth, safeLogout }) {
                   <div
                     className=" position-relative basket-total"
                     style={{ height: "21px", width: "30px" }}
-                    total-quantity={localBasket.length}
+                    total-quantity={pointOfSellState.localBasket.length}
                   >
                     <Image
                       src={basketMobile}
