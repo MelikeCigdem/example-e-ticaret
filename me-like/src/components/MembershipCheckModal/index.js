@@ -61,8 +61,8 @@ export default function RegisterModal({ opened, onClose }) {
         setErrorMessage(`Giriş başarısız: ${result.error}`);
       } else if (result?.ok) {
         console.log("Giriş başarılı!");
-        setErrorMessage("");
-        onClose();
+        setErrorMessage(""); // Hata mesajını temizle
+        onClose(); // Modal'ı kapat
       }
     } catch (error) {
       setErrorMessage(`Bir hata oluştu: ${error.message}`);
